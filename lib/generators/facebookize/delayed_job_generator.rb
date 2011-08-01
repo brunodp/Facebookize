@@ -9,7 +9,10 @@ module Facebookize
 
       def install_delayed_job
         gem 'delayed_job'
-        run 'gem install delayed_job'
+
+        Bundler::CLI.new.invoke(:update)        
+        # run 'gem install delayed_job'
+
         generate('delayed_job')
         rake('db:migrate')
       end
