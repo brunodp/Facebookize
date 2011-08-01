@@ -1,0 +1,7 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    <% if not session[:access_token] %>
+    top.location.href = '<%= Facebook::APP_PAGE %>';
+    <% end %>
+  })
+</script>

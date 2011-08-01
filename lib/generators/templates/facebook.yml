@@ -1,0 +1,15 @@
+development:
+  app_id: APP_ID
+  secret_key: SECRET_KEY
+  work_page: WORK_PAGE
+  app_page: APP_PAGE
+test:
+  app_id: APP_ID
+  secret_key: SECRET_KEY
+  work_page: WORK_PAGE
+  app_page: APP_PAGE
+production:
+  app_id: APP_ID
+  secret_key: SECRET_KEY
+  work_page: WORK_PAGE
+  app_page: APP_PAGE
