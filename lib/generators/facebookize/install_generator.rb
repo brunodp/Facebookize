@@ -13,7 +13,6 @@ module Facebookize
         if Gem.loaded_specs['rails'].version.to_s < '3.1'
           gem 'jquery-rails' 
         end
-        gem 'paperclip'
       end
             
       def run_bundle_and_generators
