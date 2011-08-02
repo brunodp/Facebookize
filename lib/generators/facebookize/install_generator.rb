@@ -13,6 +13,7 @@ module Facebookize
         if Gem.loaded_specs['rails'].version.to_s < '3.1'
           gem 'jquery-rails' 
         end
+        gem 'exception_notification'
       end
             
       def run_bundle_and_generators
@@ -50,6 +51,41 @@ module Facebookize
                   "public/javascripts/jquery.facebook.multifriend.select.min.js"
         copy_file "jquery.facebook.multifriend.select.js", "public/javascripts/jquery.facebook.multifriend.select.js"
         copy_file "jquery.facebook.multifriend.select.css", "public/stylesheets/jquery.facebook.multifriend.select.css"
+      end
+      
+      def config_exception_notification
+        code_name = ask('Codename de proyecto (para los avisos por mail de Exception Notification)?')
+        code_name = "DEFAULT" if code_name.blank?
+        gsub_file 'config/environments/production.rb', 
+                  '# Settings specified here will take precedence over those in config/application.rb', 
+                  <<-DATA
+        # Settings specified here will take precedence over those in config/application.rb
+          ActionMailer::Base.smtp_settings[:enable_starttls_auto] = false
+          config.middleware.use ExceptionNotifier,
+              :email_prefix => "[#{code_name}] ",
+              :sender_address => %{"Exception Notification" <#{code_name}@marketingsur.com>},
+              :exception_recipients => %w{lucas+apperrors@di-pentima.com.ar bruno+apperrors@di-pentima.com.ar}
+                  DATA
+        
+      end
+      
+      def config_application_controller
+        gsub_file 'app/controllers/application_controller.rb', 
+                  'protect_from_forgery', 
+                  <<-DATA
+        # protect_from_forgery
+
+          def current_user
+            session[:access_token]
+          end
+
+          def logged_in?
+            if current_user.nil?
+              redirect_to root_url
+            end
+          end
+                  DATA
+
       end
       
       # def show_readme

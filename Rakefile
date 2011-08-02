@@ -8,8 +8,9 @@ begin
     # like authors, email and has_rdoc can also be included here
     gem.version = '0.0.1'
     gem.email = 'brunodp@gmail.com'
-    gem.description = 'Preapares Rails App for Facebook development'
+    gem.description = 'Setup Rails for Facebook App development'
     gem.author = 'Bruno Di Pentima'
+    gem.homepage = 'https://github.com/brunodp/Facebookize'
 
   end
 rescue
