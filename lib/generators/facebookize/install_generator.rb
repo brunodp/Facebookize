@@ -7,17 +7,25 @@ module Facebookize
 
       desc "Prepares Rails App for Facebook Dev"
 
+      def remove_sqlite3_gem
+        gsub_file 'Gemfile', "gem 'sqlite3'", ''
+      end
+      
       def add_gems
         gem 'koala'
         gem 'geoip'
+        gem 'exception_notification'
+        gem('sqlite3', :group => 'development')
+        gem('capistrano', :group => 'development')
+        gem('mysql', :group => 'production')
         if Gem.loaded_specs['rails'].version.to_s < '3.1'
           gem 'jquery-rails' 
         end
-        gem 'exception_notification'
       end
             
       def run_bundle_and_generators
-        Bundler::CLI.new.invoke(:update)
+        # Bundler::CLI.new.invoke(:update) # Para tener input CLI
+        run('bundler install --without production')
         if Gem.loaded_specs['rails'].version.to_s < '3.1'
           generate("jquery:install", "") # "--ui" 
         end
