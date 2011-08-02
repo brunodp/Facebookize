@@ -59,12 +59,12 @@ module Facebookize
         gsub_file 'config/environments/production.rb', 
                   '# Settings specified here will take precedence over those in config/application.rb', 
                   <<-DATA
-        # Settings specified here will take precedence over those in config/application.rb
-          ActionMailer::Base.smtp_settings[:enable_starttls_auto] = false
-          config.middleware.use ExceptionNotifier,
-              :email_prefix => "[#{code_name}] ",
-              :sender_address => %{"Exception Notification" <#{code_name}@marketingsur.com>},
-              :exception_recipients => %w{lucas+apperrors@di-pentima.com.ar bruno+apperrors@di-pentima.com.ar}
+# Settings specified here will take precedence over those in config/application.rb
+  ActionMailer::Base.smtp_settings[:enable_starttls_auto] = false
+  config.middleware.use ExceptionNotifier,
+      :email_prefix => "[#{code_name}] ",
+      :sender_address => %{"Exception Notification" <#{code_name}@marketingsur.com>},
+      :exception_recipients => %w{lucas+apperrors@di-pentima.com.ar bruno+apperrors@di-pentima.com.ar}
                   DATA
         
       end
@@ -73,17 +73,17 @@ module Facebookize
         gsub_file 'app/controllers/application_controller.rb', 
                   'protect_from_forgery', 
                   <<-DATA
-        # protect_from_forgery
+# protect_from_forgery
 
-          def current_user
-            session[:access_token]
-          end
+  def current_user
+    session[:access_token]
+  end
 
-          def logged_in?
-            if current_user.nil?
-              redirect_to root_url
-            end
-          end
+  def logged_in?
+    if current_user.nil?
+      redirect_to root_url
+    end
+  end
                   DATA
 
       end
