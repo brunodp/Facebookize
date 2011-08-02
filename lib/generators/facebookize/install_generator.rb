@@ -25,7 +25,7 @@ module Facebookize
             
       def run_bundle_and_generators
         # Bundler::CLI.new.invoke(:update) # Para tener input CLI
-        run('bundler install --without production')
+        run('bundle install --without production')
         if Gem.loaded_specs['rails'].version.to_s < '3.1'
           generate("jquery:install", "") # "--ui" 
         end
