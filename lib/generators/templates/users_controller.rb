@@ -13,7 +13,8 @@ class UsersController < ApplicationController
       end
     rescue
     end
-        
+
+    callback = "http://apps.facebook.com/#{Facebook::CANVAS_PAGE_NAME}/users/logged_in"        
     @oauth_url =  Koala::Facebook::OAuth.new.url_for_oauth_code(
                     :permissions => 'user_birthday, user_hometown, user_location, email, publish_stream', 
                     :callback => callback
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
   end
   
   def logged_in
-    url = "http://apps.facebook.com/#{Facebook::WORK_PAGE}/users/logged_in"
+    url = "http://apps.facebook.com/#{Facebook::CANVAS_PAGE_NAME}/users/logged_in"
     
     begin
       access_token = Koala::Facebook::OAuth.new(url).get_access_token(params[:code]) if params[:code]

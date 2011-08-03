@@ -1,15 +1,12 @@
 development:
   app_id: APP_ID
   secret_key: SECRET_KEY
-  work_page: WORK_PAGE
-  app_page: APP_PAGE
+  canvas_page_name: CANVAS_PAGE_NAME
 test:
   app_id: APP_ID
   secret_key: SECRET_KEY
-  work_page: WORK_PAGE
-  app_page: APP_PAGE
+  canvas_page_name: CANVAS_PAGE_NAME
 production:
   app_id: APP_ID
   secret_key: SECRET_KEY
-  work_page: WORK_PAGE
-  app_page: APP_PAGE
+  canvas_page_name: CANVAS_PAGE_NAME
