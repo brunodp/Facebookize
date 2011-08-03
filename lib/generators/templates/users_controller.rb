@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     
     begin
       access_token = Koala::Facebook::OAuth.new(url).get_access_token(params[:code]) if params[:code]
-    rescue Koala::Facebook::APIError => e
+    rescue Koala::Facebook::APIError,Errno::ECONNRESET => e
       redirect_to root_url and return
     end
     
