@@ -95,6 +95,30 @@ module Facebookize
 
       end
       
+      def config_application_layout
+        gsub_file 'app/views/layouts/application.html.erb',
+                  '<body>',
+                  <<-DATA
+<body>
+  <div id="fb-root"></div>
+  <script type="text/javascript" charset="utf-8">
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '<%= Facebook::APP_ID %>', 
+        status: true, 
+        cookie: true,
+        xfbml: true
+      });
+    };
+    (function() {
+      var e = document.createElement('script'); e.async = true;
+      e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+      document.getElementById('fb-root').appendChild(e);
+    }());
+  </script>
+                DATA
+      end
+      
       # def show_readme
       #   readme "README" if behavior == :invoke
       # end
