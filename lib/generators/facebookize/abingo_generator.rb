@@ -31,7 +31,6 @@ protect_from_forgery
       Abingo.identity = session[:abingo_identity]
     end
   end
-
                   DATA
       end
       
@@ -43,7 +42,6 @@ protect_from_forgery
   
   # Para A/Bingo
   config.cache_store = :file_store, "\#{Rails.root}/tmp/cache"
-  
                   DATA
       end
       
