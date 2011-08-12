@@ -31,33 +31,45 @@ module Facebookize
       end
       
       def copy_files_and_add_routes
-        copy_file "facebook.yml", "config/facebook.yml"
-        copy_file "koala.rb", "config/initializers/koala.rb"
+        copy_file "config/facebook.yml", "config/facebook.yml"
+        copy_file "config/koala.rb", "config/initializers/koala.rb"
         copy_file "GeoIP.dat", "lib/GeoIP.dat"
         
         empty_directory "data"
         empty_directory "data/optins"
-        copy_file "user.rb", "app/models/user.rb"
+        copy_file "models/user.rb", "app/models/user.rb"
         
-        copy_file "auth.html.erb", "app/views/users/auth.html.erb"
-        copy_file "logged_in.html.erb", "app/views/users/logged_in.html.erb"
+        copy_file "views/auth.html.erb", "app/views/users/auth.html.erb"
+        copy_file "views/logged_in.html.erb", "app/views/users/logged_in.html.erb"
         
-        copy_file "users_controller.rb", "app/controllers/users_controller.rb"
+        copy_file "controllers/users_controller.rb", "app/controllers/users_controller.rb"
         
         route "match 'users/logged_in' => 'users#logged_in'"
         route "root :to => 'users#auth'"
         
         # Colorbox
-        copy_file "jquery.colorbox-min.js", "public/javascripts/jquery.colorbox-min.js"
-        copy_file "jquery.colorbox.js", "public/javascripts/jquery.colorbox.js"
-        copy_file "colorbox.css", "public/stylesheets/colorbox.css"
-        directory "colorbox", "public/images/colorbox"
+        copy_file "colorbox/jquery.colorbox-min.js", "public/javascripts/jquery.colorbox-min.js"
+        copy_file "colorbox/jquery.colorbox.js", "public/javascripts/jquery.colorbox.js"
+        copy_file "colorbox/colorbox.css", "public/stylesheets/colorbox.css"
+        directory "colorbox/colorbox", "public/images/colorbox"
         
         # Facebook Multifriend Select
-        copy_file "jquery.facebook.multifriend.select.min.js", 
+        copy_file "facebook.multifriend.select/jquery.facebook.multifriend.select.min.js", 
                   "public/javascripts/jquery.facebook.multifriend.select.min.js"
-        copy_file "jquery.facebook.multifriend.select.js", "public/javascripts/jquery.facebook.multifriend.select.js"
-        copy_file "jquery.facebook.multifriend.select.css", "public/stylesheets/jquery.facebook.multifriend.select.css"
+        copy_file "facebook.multifriend.select/jquery.facebook.multifriend.select.js", 
+                  "public/javascripts/jquery.facebook.multifriend.select.js"
+        copy_file "facebook.multifriend.select/jquery.facebook.multifriend.select.css", 
+                  "public/stylesheets/jquery.facebook.multifriend.select.css"
+        
+        # Images
+        copy_file "images/fb_indicator.gif", "public/images/fb_indicator.gif"
+        copy_file "images/grid_background.gif", "public/images/grid_background.gif"
+        
+        # Stylesheets
+        copy_file "stylesheets/styles.css", "public/stylesheets/styles.css"
+        copy_file "stylesheets/grid.css", "public/stylesheets/grid.css"
+        copy_file "stylesheets/reset.css", "public/stylesheets/reset.css"
+        copy_file "stylesheets/text.css", "public/stylesheets/text.css"
       end
       
       def config_exception_notification
@@ -72,8 +84,8 @@ module Facebookize
       :email_prefix => "[#{code_name}] ",
       :sender_address => %{"Exception Notification" <#{code_name}@marketingsur.com>},
       :exception_recipients => %w{lucas+apperrors@di-pentima.com.ar bruno+apperrors@di-pentima.com.ar}
+      
                   DATA
-        
       end
       
       def config_application_controller

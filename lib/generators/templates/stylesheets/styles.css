@@ -1,0 +1,5 @@
+body {
+  background-image: url('/images/grid_background.gif');
+  background-position: top left;
+  background-repeat: repeat-y;
+}
